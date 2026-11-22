@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.zosh</groupId>
+        <groupId>com.rlnkoo</groupId>
         <artifactId>airline-booking-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -17,15 +17,15 @@
     <description>Aggregator for all business microservices (user, flight, booking, etc.)</description>
 
     <modules>
-        <module>user-service</module>
+<!--        <module>user-service</module>-->
         <module>location-service</module>
-        <module>airline-core-service</module>
-        <module>flight-ops-service</module>
-        <module>pricing-service</module>
-        <module>seat-service</module>
-        <module>ancillary-service</module>
-        <module>booking-service</module>
-        <module>payment-service</module>
-        <module>notification-service</module>
+<!--        <module>airline-core-service</module>-->
+<!--        <module>flight-ops-service</module>-->
+<!--        <module>pricing-service</module>-->
+<!--        <module>seat-service</module>-->
+<!--        <module>ancillary-service</module>-->
+<!--        <module>booking-service</module>-->
+<!--        <module>payment-service</module>-->
+<!--        <module>notification-service</module>-->
     </modules>
 </project>
