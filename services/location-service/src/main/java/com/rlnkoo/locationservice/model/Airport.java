@@ -31,9 +31,18 @@ public class Airport {
     private GeoCode geoCode;
 
     @Column(name = "time_zone_id", length = 50)
-    private String timeZoneId;
+    private String timeZone;
 
     @ManyToOne
     @JsonIgnore
     private City city;
+
+    @JsonIgnore
+    @Transient
+    public String getDetailedName() {
+        if (city != null && city.getCountryCode() != null) {
+            return name.toUpperCase() + "/" + city.getCityCode();
+        }
+        return name.toUpperCase();
+    }
 }

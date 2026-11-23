@@ -14,6 +14,5 @@ import lombok.NoArgsConstructor;
 public class GeoCode {
 
     private Double latitude;
-
     private Double longitude;
 }
