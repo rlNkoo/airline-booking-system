@@ -31,4 +31,24 @@ public class AirportMapper {
                 .city(CityMapper.toResponse(airport.getCity()))
                 .build();
     }
+
+    public static void updateEntity(AirportRequest request, Airport existingAirport) {
+        if (request == null || existingAirport == null) return;
+
+        if (request.getIataCode() != null) {
+            existingAirport.setIataCode(request.getIataCode());
+        }
+        if (request.getName() != null) {
+            existingAirport.setName(request.getName());
+        }
+        if (request.getTimeZone() != null) {
+            existingAirport.setTimeZone(request.getTimeZone());
+        }
+        if (request.getAddress() != null) {
+            existingAirport.setAddress(request.getAddress());
+        }
+        if (request.getGeoCode() != null) {
+            existingAirport.setGeoCode(request.getGeoCode());
+        }
+    }
 }
