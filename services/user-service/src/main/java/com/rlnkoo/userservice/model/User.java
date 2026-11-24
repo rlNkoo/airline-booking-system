@@ -19,6 +19,9 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
     private String fullName;
 
     @Column(nullable = false, unique = true)
