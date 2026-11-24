@@ -8,10 +8,11 @@ import com.rlnkoo.userservice.mapper.UserMapper;
 import com.rlnkoo.userservice.model.User;
 import com.rlnkoo.userservice.repository.UserRepository;
 import com.rlnkoo.userservice.service.AuthService;
+import com.rlnkoo.userservice.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,10 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
+    private final CustomUserDetailsService customUserDetailsService;
 
     @Override
-    public AuthResponse singUp(UserDTO request) throws Exception {
+    public AuthResponse signUp(UserDTO request) throws Exception {
         User existingUser = userRepository.findByEmail(request.getEmail());
         if (existingUser != null) {
             throw new Exception("Email already registered");
@@ -62,8 +64,30 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponse login(String email, String password) {
-        return null;
+    public AuthResponse login(String email, String password) throws Exception {
+        Authentication authentication = authenticate(email, password);
+
+        User user = userRepository.findByEmail(email);
+        user.setLastLogin(LocalDateTime.now());
+        userRepository.save(user);
+
+        String jwt = jwtProvider.generateToken(authentication, user.getId());
+
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setJwt(jwt);
+        authResponse.setUser(UserMapper.toDTO(user));
+        authResponse.setTitle("Welcome!");
+        authResponse.setMessage("Registered successfully!");
+
+        return authResponse;
     }
 
+    private Authentication authenticate(String email, String password) throws Exception {
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
+
+        if (!passwordEncoder.matches(password, userDetails.getPassword())) {
+            throw new Exception("Invalid password");
+        }
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+    }
 }
