@@ -1,6 +1,7 @@
 package com.rlnkoo.payload.response;
 
 import com.rlnkoo.dto.UserDTO;
+import com.rlnkoo.embeddable.Support;
 import com.rlnkoo.enums.AirlineStatus;
 import lombok.*;
 

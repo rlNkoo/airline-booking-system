@@ -1,5 +1,6 @@
 package com.rlnkoo.airlinecoreservice.model;
 
+import com.rlnkoo.embeddable.Support;
 import com.rlnkoo.enums.AirlineStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,6 +28,9 @@ public class Airline {
     private String icaoCode;
 
     @Column(nullable = false)
+    private Long ownerId;
+
+    @Column(nullable = false)
     private String name;
 
     private String alias;
@@ -34,6 +38,9 @@ public class Airline {
     private String logoUrl;
 
     private String website;
+
+    @Embedded
+    private Support support;
 
     @Enumerated(EnumType.STRING)
     private AirlineStatus status = AirlineStatus.ACTIVE;
