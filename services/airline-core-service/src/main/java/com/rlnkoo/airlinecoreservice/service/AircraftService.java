@@ -9,7 +9,7 @@ public interface AircraftService {
 
     AircraftResponse createAircraft(AircraftRequest aircraft, Long ownerId) throws Exception;
 
-    AircraftResponse getById(Long id) throws Exception;
+    AircraftResponse getAircraftById(Long id) throws Exception;
 
     List<AircraftResponse> listAllAircraftByOwner(Long ownerId) throws Exception;
 

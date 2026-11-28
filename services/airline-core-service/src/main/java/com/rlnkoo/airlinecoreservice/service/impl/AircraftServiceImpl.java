@@ -39,7 +39,7 @@ public class AircraftServiceImpl implements AircraftService {
     }
 
     @Override
-    public AircraftResponse getById(Long id) throws Exception {
+    public AircraftResponse getAircraftById(Long id) throws Exception {
         Aircraft aircraft = aircraftRepository.findById(id)
                 .orElseThrow(() -> new Exception("Aircraft does not exist with this id"));
 
