@@ -8,4 +8,8 @@ import java.util.List;
 public interface AircraftRepository extends JpaRepository<Aircraft, Long> {
 
     List<Aircraft> findByAirlineId(Long airlineId);
+
+    boolean existsByCode(String code);
+
+    Aircraft findByIdAndAirlineId(Long id, Long airlineId);
 }

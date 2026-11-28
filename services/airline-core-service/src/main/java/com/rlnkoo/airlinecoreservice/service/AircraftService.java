@@ -9,11 +9,11 @@ public interface AircraftService {
 
     AircraftResponse createAircraft(AircraftRequest aircraft, Long ownerId) throws Exception;
 
-    AircraftResponse getById(Long id);
+    AircraftResponse getById(Long id) throws Exception;
 
-    List<AircraftResponse> listAllAircraftByOwner(Long ownerId);
+    List<AircraftResponse> listAllAircraftByOwner(Long ownerId) throws Exception;
 
-    AircraftResponse updateAircraft(AircraftRequest aircraft, Long ownerId);
+    AircraftResponse updateAircraft(Long id, AircraftRequest aircraft, Long ownerId) throws Exception;
 
-    void deleteAircraft(Long id,  Long ownerId);
+    void deleteAircraft(Long id,  Long ownerId) throws Exception;
 }
